@@ -16,7 +16,7 @@ body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #FFFFFF;
+  background: #157BB4;
 }
 
 @layer components {

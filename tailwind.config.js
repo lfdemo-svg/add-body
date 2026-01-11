@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         page: {
-          bg: '#FFFFFF',
+          bg: '#157BB4',
         },
         header: {
           text: '#1A1A1A',
