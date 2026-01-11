@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ds-corporate: #005686;
+  --ds-blue: #0870d3;
+  --ds-deep: #04315d;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer components {
+  .text-gradient {
+    background: linear-gradient(135deg, #0870d3 0%, #005686 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-hero-gradient {
+    background: linear-gradient(135deg, #0a5a9e 0%, #04315d 50%, #021a2e 100%);
+  }
+
+  .wireframe-glow {
+    filter: drop-shadow(0 0 12px rgba(8, 112, 211, 0.5));
+  }
+
+  .organ-highlight {
+    filter: drop-shadow(0 0 8px rgba(255, 120, 120, 0.6));
+  }
+
+  .label-line {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: drawLine 1.5s ease-out forwards;
+  }
+
+  @keyframes drawLine {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .rotate-indicator {
+    animation: rotateIndicator 8s linear infinite;
+  }
+
+  @keyframes rotateIndicator {
+    from {
+      stroke-dashoffset: 0;
+    }
+    to {
+      stroke-dashoffset: -628;
+    }
+  }
+}

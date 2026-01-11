@@ -1,0 +1,752 @@
+{
+  "meta": {
+    "title": "Virtual Twin (interactive web experience)",
+    "source": {
+      "video_file": "shorter2.mp4.mov",
+      "observed_viewport_px": {
+        "width": 1096,
+        "height": 720
+      },
+      "notes": [
+        "Spec is derived from the provided screen-recording; values are best-fit approximations from pixels.",
+        "Only the interactions/sections visible in the clip are specified (Hero + Living Brain tab + disease modals)."
+      ]
+    },
+    "schema_version": "1.0.0",
+    "generated_at": "2026-01-10T23:26:50.851561Z"
+  },
+  "designTokens": {
+    "colors": {
+      "pageBackground": "#FFFFFF",
+      "headerText": "#1A1A1A",
+      "headerDivider": "rgba(0,0,0,0.06)",
+      "canvasGradient": {
+        "type": "radial+linear blend (vignette)",
+        "stops": [
+          {
+            "pos": "top-left",
+            "color": "#104D76"
+          },
+          {
+            "pos": "top-center",
+            "color": "#0E5994"
+          },
+          {
+            "pos": "top-right",
+            "color": "#0A3F72"
+          },
+          {
+            "pos": "bottom-left",
+            "color": "#2190C8"
+          },
+          {
+            "pos": "bottom-center",
+            "color": "#157BB4"
+          },
+          {
+            "pos": "bottom-right",
+            "color": "#1592D1"
+          }
+        ]
+      },
+      "textOnBluePrimary": "#FFFFFF",
+      "textOnBlueSecondary": "rgba(255,255,255,0.78)",
+      "textOnBlueMuted": "rgba(255,255,255,0.55)",
+      "accentCyan": "#44E6FD",
+      "accentCyanDark": "#0FB7D6",
+      "accentCyanGlow": "rgba(68,230,253,0.55)",
+      "highlightRed": "#EB586C",
+      "highlightRedSoft": "#FFAAA7",
+      "wireframeWhite": "rgba(255,255,255,0.32)",
+      "wireframeWhiteDense": "rgba(255,255,255,0.45)",
+      "modalBg": "#FFFFFF",
+      "modalText": "#202225",
+      "modalTextMuted": "#4A5560",
+      "modalShadow": "0 20px 50px rgba(0,0,0,0.18)",
+      "modalBorder": "rgba(0,0,0,0.08)"
+    },
+    "typography": {
+      "fontFamilyPrimary": "Corporate geometric sans (likely custom 3DS); fallback: 'Helvetica Neue', Arial, sans-serif",
+      "fontFamilyMonospace": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+      "h1Hero": {
+        "textTransform": "uppercase",
+        "fontSizePx": 60,
+        "lineHeight": 1.02,
+        "letterSpacingEm": 0.01,
+        "fontWeight": 800
+      },
+      "h2Section": {
+        "textTransform": "uppercase",
+        "fontSizePx": 42,
+        "lineHeight": 1.06,
+        "letterSpacingEm": 0.01,
+        "fontWeight": 800
+      },
+      "bodySmall": {
+        "fontSizePx": 13,
+        "lineHeight": 1.55,
+        "fontWeight": 400
+      },
+      "bodyEmphasis": {
+        "fontWeight": 700
+      },
+      "pillLabel": {
+        "fontSizePx": 11,
+        "letterSpacingEm": 0.08,
+        "fontWeight": 700,
+        "textTransform": "uppercase"
+      },
+      "statsNumber": {
+        "fontSizePx": 18,
+        "fontWeight": 800
+      },
+      "statsCaption": {
+        "fontSizePx": 11,
+        "fontWeight": 500,
+        "opacity": 0.85
+      }
+    },
+    "spacing": {
+      "basePx": 8,
+      "pageMaxWidthPx": 1280,
+      "pageSideGutterPx": 24,
+      "canvasHeightDesktopPx": 640,
+      "canvasInnerPaddingPx": 64,
+      "columnGapPx": 48
+    },
+    "radii": {
+      "pillPx": 999,
+      "modalPx": 16,
+      "iconButtonPx": 999
+    }
+  },
+  "layout": {
+    "page": {
+      "background": "pageBackground",
+      "structure": [
+        "Sticky header (white) across the full viewport width",
+        "Centered main content container",
+        "Inside main content: a large blue interactive canvas/scene"
+      ]
+    },
+    "header": {
+      "type": "sticky",
+      "heightPx": 56,
+      "paddingPx": {
+        "x": 24,
+        "y": 14
+      },
+      "left": {
+        "title": "Virtual Twin",
+        "style": {
+          "fontSizePx": 14,
+          "fontWeight": 500
+        }
+      },
+      "rightNav": {
+        "items": [
+          {
+            "label": "Manufacturing Industries",
+            "type": "link"
+          },
+          {
+            "label": "Life Sciences & Healthcare",
+            "type": "dropdown",
+            "caret": true
+          },
+          {
+            "label": "Infrastructure & Cities",
+            "type": "link"
+          }
+        ],
+        "gapPx": 22,
+        "style": {
+          "fontSizePx": 12,
+          "fontWeight": 500,
+          "color": "headerText"
+        }
+      }
+    },
+    "interactiveCanvas": {
+      "container": {
+        "maxWidthPx": 1280,
+        "margin": "0 auto",
+        "heightPx": 640,
+        "background": "canvasGradient",
+        "overflow": "hidden",
+        "position": "relative"
+      },
+      "topLeftIcon": {
+        "type": "iconButton",
+        "icon": "home",
+        "position": {
+          "topPx": 26,
+          "leftPx": 26
+        },
+        "sizePx": 34,
+        "style": {
+          "border": "1px solid rgba(255,255,255,0.25)",
+          "bg": "transparent",
+          "iconColor": "rgba(255,255,255,0.65)"
+        },
+        "onClick": "scrollToSection:hero"
+      },
+      "topRightIcon": {
+        "type": "iconButton",
+        "icon": "fullscreen",
+        "position": {
+          "topPx": 26,
+          "rightPx": 26
+        },
+        "sizePx": 20,
+        "style": {
+          "bg": "transparent",
+          "iconColor": "rgba(255,255,255,0.65)"
+        },
+        "onClick": "toggleFullscreenForCanvas"
+      },
+      "tabToggle": {
+        "position": {
+          "topPx": 22,
+          "centered": true
+        },
+        "style": {
+          "heightPx": 26,
+          "borderRadius": "pillPx",
+          "border": "1px solid rgba(255,255,255,0.25)",
+          "bg": "rgba(0,0,0,0.08)"
+        },
+        "items": [
+          {
+            "key": "brain",
+            "label": "BRAIN",
+            "selectedStyle": {
+              "bg": "rgba(255,255,255,0.95)",
+              "textColor": "#0E5994"
+            },
+            "unselectedStyle": {
+              "bg": "transparent",
+              "textColor": "rgba(255,255,255,0.85)"
+            }
+          },
+          {
+            "key": "heart",
+            "label": "HEART",
+            "selectedStyle": {
+              "bg": "rgba(255,255,255,0.95)",
+              "textColor": "#0E5994"
+            },
+            "unselectedStyle": {
+              "bg": "transparent",
+              "textColor": "rgba(255,255,255,0.85)"
+            }
+          }
+        ],
+        "transition": {
+          "durationMs": 220,
+          "easing": "easeOut"
+        },
+        "notes": [
+          "In the clip, the BRAIN tab is active while viewing the 'THE LIVING BRAIN' section."
+        ]
+      }
+    }
+  },
+  "pages": [
+    {
+      "route": "/virtual-twin",
+      "title": "Virtual Twin",
+      "sections": [
+        {
+          "id": "hero",
+          "type": "splitHero",
+          "layout": {
+            "columns": [
+              {
+                "widthPercent": 44,
+                "align": "left"
+              },
+              {
+                "widthPercent": 56,
+                "align": "right"
+              }
+            ],
+            "paddingPx": {
+              "left": 96,
+              "right": 72,
+              "top": 170,
+              "bottom": 90
+            },
+            "alignY": "center"
+          },
+          "contentLeft": {
+            "headline": "MEET YOUR\nVIRTUAL TWIN",
+            "headlineStyleToken": "h1Hero",
+            "body": [
+              {
+                "text": "The virtual twin of the human is an accurate model ready for simulation of real life.",
+                "emphasis": [
+                  "simulation of real life"
+                ]
+              },
+              {
+                "text": "Your virtual twin can save your life.\nBy merging clinical or wearable sensor observations with your virtual heart or your virtual brain, experts can diagnose, monitor or identify a cure, with a non-invasive technic, by adapting known treatments to your unique condition.",
+                "emphasis": [
+                  "diagnose",
+                  "monitor",
+                  "identify a cure",
+                  "non-invasive technic"
+                ]
+              }
+            ],
+            "bodyStyle": {
+              "token": "bodySmall",
+              "color": "textOnBlueSecondary"
+            },
+            "maxWidthPx": 420
+          },
+          "contentRight": {
+            "type": "webglScene",
+            "scene": {
+              "background": "transparent (lets gradient show through)",
+              "objects": [
+                {
+                  "id": "humanWireframe",
+                  "type": "3dPointCloudHuman",
+                  "style": {
+                    "pointColor": "wireframeWhite",
+                    "density": "high"
+                  },
+                  "pose": "standing frontal, arms slightly away from torso",
+                  "shadow": {
+                    "type": "soft oval ground shadow",
+                    "opacity": 0.25
+                  }
+                },
+                {
+                  "id": "brainHighlight",
+                  "type": "3dOrganOverlay",
+                  "organ": "brain",
+                  "color": "highlightRed",
+                  "glow": "rgba(235,88,108,0.25)",
+                  "position": "inside head"
+                },
+                {
+                  "id": "heartHighlight",
+                  "type": "3dOrganOverlay",
+                  "organ": "heart",
+                  "color": "highlightRed",
+                  "glow": "rgba(235,88,108,0.25)",
+                  "position": "left chest"
+                }
+              ],
+              "interaction": {
+                "rotationHint": {
+                  "type": "ellipticalRing",
+                  "label": "360\u00b0",
+                  "position": "centered around waist",
+                  "style": {
+                    "stroke": "rgba(255,255,255,0.18)",
+                    "textColor": "textOnBlueMuted"
+                  }
+                }
+              }
+            },
+            "callouts": [
+              {
+                "label": "BRAIN",
+                "target": "brainHighlight",
+                "pill": {
+                  "borderColor": "accentCyan",
+                  "textStyleToken": "pillLabel"
+                },
+                "connector": {
+                  "stroke": "accentCyan",
+                  "node": {
+                    "shape": "circle",
+                    "rPx": 5
+                  }
+                }
+              },
+              {
+                "label": "HEART",
+                "target": "heartHighlight",
+                "pill": {
+                  "borderColor": "accentCyan",
+                  "textStyleToken": "pillLabel"
+                },
+                "connector": {
+                  "stroke": "accentCyan",
+                  "node": {
+                    "shape": "circle",
+                    "rPx": 5
+                  }
+                }
+              }
+            ]
+          },
+          "animations": [
+            {
+              "when": "onLoad",
+              "targets": [
+                "headline",
+                "body"
+              ],
+              "type": "fade+slide",
+              "from": {
+                "opacity": 0,
+                "translateYpx": 10
+              },
+              "to": {
+                "opacity": 1,
+                "translateYpx": 0
+              },
+              "durationMs": 650,
+              "easing": "cubic-bezier(0.2, 0.8, 0.2, 1)",
+              "staggerMs": 120
+            },
+            {
+              "when": "idle",
+              "targets": [
+                "humanWireframe"
+              ],
+              "type": "subtleFloat",
+              "amplitudePx": 4,
+              "periodMs": 5200
+            }
+          ]
+        },
+        {
+          "id": "living-brain",
+          "type": "tabbedInteractiveSection",
+          "tabKey": "brain",
+          "layout": {
+            "columns": [
+              {
+                "widthPercent": 55,
+                "align": "left"
+              },
+              {
+                "widthPercent": 45,
+                "align": "right"
+              }
+            ],
+            "paddingPx": {
+              "left": 96,
+              "right": 72,
+              "top": 140,
+              "bottom": 90
+            },
+            "alignY": "start"
+          },
+          "contentLeft": {
+            "title": "THE LIVING BRAIN",
+            "titleStyleToken": "h2Section",
+            "body": [
+              {
+                "text": "Neurological disorders are the leading cause of years of life lost by diseases, with a major prevalence of strokes (Cerebro-vascular diseases), with also Alzheimer's disease, Epilepsy, or Multiple Sclerosis."
+              }
+            ],
+            "statsRow": [
+              {
+                "value": "42%",
+                "label": "Cerebrovascular disease"
+              },
+              {
+                "value": "11%",
+                "label": "Alzheimer"
+              },
+              {
+                "value": "5%",
+                "label": "Epilepsy"
+              },
+              {
+                "value": "0.5%",
+                "label": "Multiple Sclerosis"
+              }
+            ],
+            "body2": [
+              {
+                "text": "Those pathologies involve complex pathological mechanisms requiring multiple exams and costly hospital stays to be correctly diagnosed, treated and monitored.\nIf we automatically build a personalized 3D Twin of the brain could we improve the decision making of practitioners ?",
+                "emphasis": [
+                  "complex pathological mechanisms",
+                  "could we improve the decision making of practitioners ?"
+                ]
+              }
+            ],
+            "style": {
+              "textColor": "textOnBlueSecondary"
+            }
+          },
+          "contentRight": {
+            "type": "webglScene",
+            "scene": {
+              "objects": [
+                {
+                  "id": "brainWireframe",
+                  "type": "3dPointCloudBrain",
+                  "style": {
+                    "pointColor": "wireframeWhiteDense",
+                    "opacity": 0.9
+                  },
+                  "defaultOrientation": "3/4 view",
+                  "lighting": "soft, cool, from upper-left"
+                }
+              ],
+              "interaction": {
+                "dragRotate": {
+                  "enabled": true,
+                  "axis": "free orbit (yaw+pitch limited)",
+                  "inertia": true,
+                  "inertiaDecay": 0.92,
+                  "cursor": {
+                    "default": "grab",
+                    "active": "grabbing"
+                  }
+                },
+                "rotationHint": {
+                  "type": "ellipticalRing",
+                  "label": "360\u00b0",
+                  "position": "below model (center-right)",
+                  "style": {
+                    "stroke": "rgba(255,255,255,0.16)",
+                    "textColor": "textOnBlueMuted"
+                  }
+                }
+              }
+            },
+            "callouts": [
+              {
+                "key": "multiple-sclerosis",
+                "label": "MULTIPLE SCLEROSIS",
+                "posHint": "top of model"
+              },
+              {
+                "key": "alzheimer",
+                "label": "ALZHEIMER",
+                "posHint": "left of model"
+              },
+              {
+                "key": "epilepsy",
+                "label": "EPILEPSY",
+                "posHint": "bottom of model"
+              }
+            ],
+            "calloutStyle": {
+              "pill": {
+                "border": "1px solid accentCyan",
+                "borderRadius": "pillPx",
+                "paddingPx": {
+                  "x": 14,
+                  "y": 7
+                },
+                "textStyleToken": "pillLabel",
+                "textColor": "rgba(255,255,255,0.92)",
+                "bg": "rgba(0,0,0,0.08)"
+              },
+              "connector": {
+                "stroke": "accentCyan",
+                "strokeWidthPx": 2,
+                "nodeRadiusPx": 6
+              },
+              "hover": {
+                "pillBg": "accentCyan",
+                "pillTextColor": "#063B55",
+                "glow": "accentCyanGlow",
+                "transition": {
+                  "durationMs": 180,
+                  "easing": "easeOut"
+                }
+              }
+            }
+          },
+          "interactions": [
+            {
+              "event": "hover",
+              "target": "calloutPill",
+              "effect": [
+                "glow",
+                "fillAccent",
+                "slightlyThickerConnector"
+              ]
+            },
+            {
+              "event": "click",
+              "target": "calloutPill",
+              "action": "openModal(diseaseKey)"
+            }
+          ]
+        }
+      ],
+      "modals": [
+        {
+          "id": "disease-info-modal",
+          "layout": {
+            "type": "floatingPanel",
+            "position": {
+              "topPx": 120,
+              "leftPx": 120
+            },
+            "sizePx": {
+              "width": 480,
+              "height": 520
+            },
+            "bg": "modalBg",
+            "borderRadiusPx": 16,
+            "shadow": "modalShadow",
+            "border": "1px solid rgba(0,0,0,0.08)"
+          },
+          "closeButton": {
+            "type": "iconButton",
+            "icon": "x",
+            "position": {
+              "topPx": 10,
+              "rightPx": 10
+            },
+            "sizePx": 32,
+            "style": {
+              "bg": "rgba(255,255,255,0.95)",
+              "border": "1px solid rgba(0,0,0,0.10)"
+            },
+            "events": [
+              "clickToClose"
+            ]
+          },
+          "content": {
+            "topMedia": {
+              "type": "embeddedVideo",
+              "heightPx": 240,
+              "playerUI": "native HTML5 controls (dark control bar)",
+              "aspect": "16:9-ish inside container"
+            },
+            "bodyScroll": {
+              "type": "scrollable",
+              "scrollbar": {
+                "widthPx": 4,
+                "thumbColor": "rgba(13, 98, 160, 0.55)",
+                "trackColor": "rgba(0,0,0,0.06)"
+              }
+            },
+            "typography": {
+              "title": {
+                "fontSizePx": 18,
+                "fontWeight": 800,
+                "color": "modalText"
+              },
+              "paragraph": {
+                "fontSizePx": 12.5,
+                "lineHeight": 1.55,
+                "color": "modalTextMuted"
+              },
+              "bold": {
+                "fontWeight": 800
+              }
+            }
+          },
+          "animation": {
+            "open": {
+              "type": "fade+scale",
+              "from": {
+                "opacity": 0,
+                "scale": 0.98,
+                "translateYpx": 6
+              },
+              "to": {
+                "opacity": 1,
+                "scale": 1.0,
+                "translateYpx": 0
+              },
+              "durationMs": 220,
+              "easing": "easeOut"
+            },
+            "close": {
+              "type": "fade",
+              "durationMs": 150,
+              "easing": "easeIn"
+            }
+          },
+          "dataBindings": {
+            "multiple-sclerosis": {
+              "title": "Multiple Sclerosis",
+              "videoAsset": "assets/videos/multiple-sclerosis.mp4",
+              "body": "Text paragraphs with bold phrases (e.g., 'MRI modality named FLAIR', 'Dissemination in space', 'Dissemination in time', etc.)."
+            },
+            "alzheimer": {
+              "title": "Alzheimer",
+              "videoAsset": "assets/videos/alzheimer.mp4",
+              "body": "Text paragraphs; mentions biomarkers, cortex thinning, etc."
+            },
+            "epilepsy": {
+              "title": "Epilepsy",
+              "videoAsset": "assets/videos/epilepsy.mp4",
+              "body": "Text paragraphs; mentions uncontrolled neuronal activation, drug-resistant cases, electrical stimulation/surgery, etc."
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "assets": {
+    "icons": [
+      {
+        "name": "home",
+        "style": "line icon, thin stroke, rounded"
+      },
+      {
+        "name": "fullscreen",
+        "style": "line icon, thin stroke"
+      },
+      {
+        "name": "x",
+        "style": "line icon"
+      }
+    ],
+    "3d": [
+      {
+        "name": "humanWireframe",
+        "format": "glTF/three.js procedural point cloud",
+        "notes": "semi-transparent dotted mesh silhouette"
+      },
+      {
+        "name": "brainWireframe",
+        "format": "glTF/three.js point cloud",
+        "notes": "white/cool dots forming brain volume"
+      },
+      {
+        "name": "organOverlays",
+        "format": "mesh overlays",
+        "notes": "solid red/pink brain & heart on the human model"
+      }
+    ],
+    "videos": [
+      {
+        "key": "multiple-sclerosis",
+        "duration_s": 30,
+        "notes": "white background with colorful tract/brain visual"
+      },
+      {
+        "key": "alzheimer",
+        "duration_s": 30,
+        "notes": "multicolor cortex/regions visual"
+      },
+      {
+        "key": "epilepsy",
+        "duration_s": 30,
+        "notes": "brain + EEG panel visual"
+      }
+    ]
+  },
+  "implementationHints": {
+    "stackSuggestions": [
+      "React/Next.js + CSS variables for tokens + Tailwind (optional) for layout",
+      "three.js (or react-three-fiber) for the wireframe/point cloud scenes",
+      "Use requestAnimationFrame for idle float + inertial drag rotation",
+      "Use a modal portal with internal scroll and a fixed header close button"
+    ],
+    "criticalInteractionsToMatch": [
+      "Cyan pill callouts with connectors; hover state fills and glows",
+      "Drag to rotate the 3D model with a visible '360\u00b0' ring hint",
+      "Disease modal appears as a left-floating white card with embedded video and scrollable text"
+    ]
+  }
+}
