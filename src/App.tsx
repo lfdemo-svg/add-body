@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Header from './components/Header';
 import InteractiveCanvas from './components/InteractiveCanvas';
 import TabToggle from './components/TabToggle';
 import HeroSection from './components/HeroSection';
@@ -26,8 +25,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-page-bg">
-      <Header />
-
       <main>
         <InteractiveCanvas
           topCenterContent={
