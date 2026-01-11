@@ -1,78 +1,112 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --ds-corporate: #005686;
-  --ds-blue: #0870d3;
-  --ds-deep: #04315d;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #FFFFFF;
 }
 
 @layer components {
-  .text-gradient {
-    background: linear-gradient(135deg, #0870d3 0%, #005686 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .canvas-gradient {
+    background:
+      radial-gradient(ellipse 120% 100% at 30% 20%, #104D76 0%, transparent 50%),
+      radial-gradient(ellipse 100% 80% at 70% 30%, #0A3F72 0%, transparent 45%),
+      radial-gradient(ellipse 80% 60% at 20% 80%, #2190C8 0%, transparent 50%),
+      radial-gradient(ellipse 90% 70% at 80% 70%, #1592D1 0%, transparent 45%),
+      linear-gradient(180deg, #0E5994 0%, #157BB4 100%);
   }
 
-  .bg-hero-gradient {
-    background: linear-gradient(135deg, #0a5a9e 0%, #04315d 50%, #021a2e 100%);
+  .text-emphasis {
+    @apply font-bold;
   }
 
-  .wireframe-glow {
-    filter: drop-shadow(0 0 12px rgba(8, 112, 211, 0.5));
+  .callout-pill {
+    @apply px-4 py-2 rounded-pill border border-accent-cyan bg-black/5
+           text-pill-label uppercase tracking-widest text-white/90
+           transition-all duration-200 cursor-pointer;
   }
 
-  .organ-highlight {
-    filter: drop-shadow(0 0 8px rgba(255, 120, 120, 0.6));
+  .callout-pill:hover {
+    @apply bg-accent-cyan text-[#063B55];
+    box-shadow: 0 0 20px rgba(68, 230, 253, 0.55);
   }
 
-  .label-line {
-    stroke-dasharray: 200;
-    stroke-dashoffset: 200;
-    animation: drawLine 1.5s ease-out forwards;
+  .connector-line {
+    stroke: #44E6FD;
+    stroke-width: 2px;
+    fill: none;
   }
 
-  @keyframes drawLine {
-    to {
-      stroke-dashoffset: 0;
-    }
+  .connector-node {
+    fill: #44E6FD;
   }
 
-  .fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
+  .stat-card {
+    @apply text-center;
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .stat-number {
+    @apply text-stats-number text-white font-extrabold;
   }
 
-  .rotate-indicator {
-    animation: rotateIndicator 8s linear infinite;
+  .stat-label {
+    @apply text-stats-caption text-white/85;
   }
 
-  @keyframes rotateIndicator {
-    from {
-      stroke-dashoffset: 0;
-    }
-    to {
-      stroke-dashoffset: -628;
-    }
+  .modal-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .modal-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 2px;
+  }
+
+  .modal-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(13, 98, 160, 0.55);
+    border-radius: 2px;
+  }
+
+  .organ-glow {
+    filter: drop-shadow(0 0 12px rgba(235, 88, 108, 0.5));
+  }
+
+  .wireframe-material {
+    opacity: 0.32;
+  }
+}
+
+@layer utilities {
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  .animation-delay-800 {
+    animation-delay: 800ms;
   }
 }
